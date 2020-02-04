@@ -1,0 +1,12 @@
+---
+- hosts: all
+  remote_user: pete
+  become: yes
+  tasks:
+  - name: packages
+    package:
+      name: rsyslog
+      state: present
+  - name: list
+    shell:
+      cmd: id
