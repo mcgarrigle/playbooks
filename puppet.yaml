@@ -13,8 +13,13 @@
       name: 
       - git
       - vim
+      - tree
       - puppet-agent
       state: present
+  - name: bashrc
+    copy:
+      dest: /root/.bashrc
+      src: ./files/bashrc
 - hosts: puppet
   remote_user: cloud
   become: yes
