@@ -1,0 +1,28 @@
+---
+- hosts: all
+  remote_user: cloud
+  tasks:
+  - name: packages
+    yum:
+      name: 
+      - epel-release
+      - git
+      - vim
+      - tree
+      - python3
+      state: present
+    become: yes
+    become_user: root
+  - name: shell
+    git: 
+      repo: 'https://github.com/mcgarrigle/bin.git'
+      dest: '.'
+      update: no
+  - name: configure shell
+    command: bin/vm-configure shell
+    args:
+      creates: .tmux.conf
+  - name: configure vim
+    command: bin/vm-configure vim
+    args:
+      creates: .vimrc

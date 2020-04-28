@@ -20,7 +20,7 @@
     copy:
       dest: /root/.bashrc
       src: ./files/bashrc
-- hosts: puppet
+- hosts: puppet*
   remote_user: cloud
   become: yes
   tasks:
@@ -33,6 +33,10 @@
     copy:
       dest: /etc/puppetlabs/puppet/autosign.conf
       content: '*'
+  - name: r10k configuration
+    copy:
+      dest: /root/r10k.yaml
+      src: ./files/r10k.yaml
   - name: bashrc
     lineinfile:
       path: /root/.bashrc
