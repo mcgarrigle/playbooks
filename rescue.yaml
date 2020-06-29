@@ -1,4 +1,5 @@
 ---
+# password is currently 'letmein' - change that please
 - hosts: all
   tasks:
   - name: packages
@@ -15,6 +16,7 @@
   - name: create user
     user:
       name: rescue
+      password: '$6$nwmqPjZrLXKCYuZP$VSR59dOb8wysUVYcBiNZmVKCBd2oC6qAr5QebHA8ygGMnZtE351kxMOVracnvHKAaqeyNJE6x0KTfmEc7pU7s.'
       groups: wheel
       expires: -1
   - name: Allow 'wheel' group to have passwordless sudo
