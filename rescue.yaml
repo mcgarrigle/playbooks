@@ -1,0 +1,26 @@
+---
+- hosts: all
+  tasks:
+  - name: packages
+    yum:
+      name: 
+      - epel-release
+      - git
+      - vim
+      - tree
+      - python3
+      state: present
+    become: yes
+    become_user: root
+  - name: create user
+    user:
+      name: rescue
+      groups: wheel
+      expires: -1
+  - name: Allow 'wheel' group to have passwordless sudo
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^%wheel'
+      line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
