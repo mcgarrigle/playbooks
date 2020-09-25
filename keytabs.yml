@@ -16,7 +16,10 @@
         state: directory
     - name: copy keytab
       copy:
-        src: "./files/{{ item }}"
+        src: "./files/{{ item.name }}"
         dest: /etc/keytabs/
+        owner: "{{ item.owner }}"
+        group: "{{ item.group }}"
+        mode: "u=wr,g=r,o-rwx"
         decrypt: yes
       with_items: "{{ keytabs }}"
