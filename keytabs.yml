@@ -3,9 +3,9 @@
 # $ ansible-vault encrypt files/*.keytab --vault-id keytabs@passwords
 #
 # // run using:
-# $ ansible-playbook -i inventory keytabs.yaml --vault-id keytabs@passwords
+# $ ansible-playbook -i inventory keytabs.yml --vault-id keytabs@passwords
 # or
-# $ ansible-playbook -i inventory keytabs.yaml --vault-password-file passwords
+# $ ansible-playbook -i inventory keytabs.yml --vault-password-file passwords
 #
 - hosts: all
   become: yes
