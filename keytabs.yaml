@@ -1,0 +1,22 @@
+---
+# // encrypt using:
+# $ ansible-vault encrypt files/*.keytab --vault-id keytabs@passwords
+#
+# // run using:
+# $ ansible-playbook -i inventory keytabs.yaml --vault-id keytabs@passwords
+# or
+# $ ansible-playbook -i inventory keytabs.yaml --vault-password-file passwords
+#
+- hosts: all
+  become: yes
+  tasks:
+    - name: keytab directory
+      file:
+        path: /etc/keytabs
+        state: directory
+    - name: copy keytab
+      copy:
+        src: "./files/{{ item }}"
+        dest: /etc/keytabs/
+        decrypt: yes
+      with_items: "{{ keytabs }}"

@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  remote_user: cloud
   become: yes
   tasks:
   - name: repos
@@ -21,7 +20,6 @@
       dest: /root/.bashrc
       src: ./files/bashrc
 - hosts: puppet*
-  remote_user: cloud
   become: yes
   tasks:
   - name: packages
