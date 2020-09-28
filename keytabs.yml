@@ -6,14 +6,28 @@
 # $ ansible-playbook -i inventory keytabs.yml --vault-id keytabs@passwords
 # or
 # $ ansible-playbook -i inventory keytabs.yml --vault-password-file passwords
-#
+
+- hosts: localhost
+  become: yes
+  tasks:
+
+    - name: download keytabs
+      get_url:
+        url: "http://pi1.mac.wales/{{ item }}"
+        dest: "./files/"
+      with_items:
+        - user1.keytab
+        - user2.keytab
+
 - hosts: all
   become: yes
   tasks:
+
     - name: keytab directory
       file:
         path: /etc/keytabs
         state: directory
+
     - name: copy keytab
       copy:
         src: "./files/{{ item.name }}"
